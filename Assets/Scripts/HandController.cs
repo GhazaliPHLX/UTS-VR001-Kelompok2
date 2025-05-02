@@ -1,54 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
     public Transform hand;
-    public float mouseSensitivity = 2f;
-    private Vector3 handOffset;
+    public Transform playerCamera;
+    public float mouseSensitivity = 0.5f;
+
+    private Vector2 mouseInput;
     private Vector2 handRotation = Vector2.zero;
 
-    public Transform playerCamera;
-
-
-
-    private void Start()
-    {
-        // Hitung offset berdasarkan kamera, setelah semua referensi sudah valid
-        handOffset = playerCamera.right * 0.4f    // kanan
-                   + playerCamera.up * -0.3f      // sedikit ke bawah
-                   + playerCamera.forward * 0.5f; // sedikit ke depan
-    }
+    // Offset posisi tangan dari bahu relatif ke arah kamera
+    public Vector3 positionOffset = new Vector3(0.4f, -0.3f, 0.5f);
+    public Vector3 rotationOffset = new Vector3(90f, -130f, -120f);
 
     private void LateUpdate()
     {
+        // Posisi tangan selalu mengikuti kamera + offset dari posisi kamera (seolah dari bahu)
         hand.position = playerCamera.position
-                  + playerCamera.right * 0.4f
-                  + playerCamera.up * - 0.3f
-                  + playerCamera.forward * 0.5f;
+                      + playerCamera.right * positionOffset.x
+                      + playerCamera.up * positionOffset.y
+                      + playerCamera.forward * positionOffset.z;
 
-        // Bikin offset rotasi agar tangan miring sedikit
         if (!Input.GetMouseButton(1))
         {
-            Quaternion rotationOffset = Quaternion.Euler(90f, -130f, -120f); // miring ke bawah dan ke kanan
-            hand.rotation = playerCamera.rotation * rotationOffset;
+            // Tanpa klik kanan, tangan tetap mengikuti rotasi kamera
+            hand.rotation = playerCamera.rotation * Quaternion.Euler(rotationOffset);
         }
         else
         {
-            hand.position = playerCamera.position
-                  + playerCamera.right * 0.4f
-                  + playerCamera.up * -0.3f
-                  + playerCamera.forward * 0.5f;
+            // Input mouse untuk rotasi tangan
+            mouseInput.x += Input.GetAxis("Mouse X") * mouseSensitivity;
+            mouseInput.y -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+            mouseInput.y = Mathf.Clamp(mouseInput.y, -80f, 80f);
 
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-
-            handRotation.x += mouseX;
-            handRotation.y -= mouseY;
-            handRotation.y = Mathf.Clamp(handRotation.y, -45f, 45f);
-
-            hand.rotation = playerCamera.rotation * Quaternion.Euler(handRotation.y, handRotation.x, 0f);
+            Quaternion handRot = Quaternion.Euler(mouseInput.y, mouseInput.x, 0);
+            hand.rotation = playerCamera.rotation * handRot * Quaternion.Euler(rotationOffset);
         }
     }
 }
