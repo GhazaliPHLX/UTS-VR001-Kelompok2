@@ -20,6 +20,7 @@ public class FPS_CharaMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!Input.GetMouseButton(1)) { 
         // Ngambil Mouse Input
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivityX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivityY;
@@ -31,7 +32,8 @@ public class FPS_CharaMovement : MonoBehaviour
         // Rotasi kamera dan orientasi
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-
+        }
+        
 
 
     }
