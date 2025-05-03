@@ -6,6 +6,10 @@ public class RaycastInteractor : MonoBehaviour
     public float interactDistance = 1f;
     private LineRenderer lineRenderer;
 
+    private RaycastHit cachedHit;
+    private bool hasHit = false;
+
+
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -25,36 +29,40 @@ public class RaycastInteractor : MonoBehaviour
         {
             Vector3 rayOrigin = hand.position;
             Vector3 rayDirection = hand.up;
-
-            Ray ray = new Ray(rayOrigin, rayDirection);
-            RaycastHit hit;
             Vector3 rayEnd = rayOrigin + rayDirection * interactDistance;
 
-            if (Physics.Raycast(ray, out hit, interactDistance))
-            {
-                rayEnd = hit.point;
+            Ray ray = new Ray(rayOrigin, rayDirection);
 
-                var interactable = hit.collider.GetComponent<IInteractable>();
-                if (interactable != null)
-                {
-                    interactable.Interact();
-                }
-
-                Debug.Log("Interacted with: " + hit.collider.name);
-            }
-            else
+            hasHit = Physics.Raycast(ray, out cachedHit, interactDistance);
+            if (hasHit)
             {
-                Debug.Log("Nothing to interact with");
+                rayEnd = cachedHit.point;
             }
 
-            // Ini penting: gunakan posisi world dari hand
+            // Gambar ray visual
             lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, rayOrigin);
             lineRenderer.SetPosition(1, rayEnd);
+
+            // Klik kiri untuk interaksi
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (hasHit)
+                {
+                    var interactable = cachedHit.collider.GetComponent<IInteractable>();
+                    interactable?.Interact();
+                    // Debug.Log("Interacted with: " + cachedHit.collider.name);
+                }
+                else
+                {
+                    Debug.Log("Nothing to interact with");
+                }
+            }
         }
         else
         {
             lineRenderer.enabled = false;
+            hasHit = false;
         }
     }
 }

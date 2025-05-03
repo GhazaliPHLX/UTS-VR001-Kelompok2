@@ -7,7 +7,7 @@ public class DoorScript : MonoBehaviour, IInteractable
 
     private bool isOpen = false;
 
-    public void Interact()
+    public virtual void Interact()
     {
         if (isOpen)
         {
@@ -16,6 +16,7 @@ public class DoorScript : MonoBehaviour, IInteractable
         else
         {
             OpenDoor();
+
         }
 
         isOpen = !isOpen;
@@ -25,13 +26,11 @@ public class DoorScript : MonoBehaviour, IInteractable
     {
         doorClose.SetActive(false);
         doorOpen.SetActive(true);
-        Debug.Log("Pintu dibuka");
     }
 
     private void CloseDoor()
     {
         doorClose.SetActive(true);
         doorOpen.SetActive(false);
-        Debug.Log("Pintu ditutup");
     }
 }
