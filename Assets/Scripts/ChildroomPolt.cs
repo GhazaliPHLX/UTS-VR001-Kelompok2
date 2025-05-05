@@ -17,7 +17,7 @@ public class ChildroomPolt : MonoBehaviour , ITrigger
             Debug.Log("DoorClosed");
         }
 
-        CloseDoor doorScript1= door1.GetComponent<CloseDoor>();
+        CloseDoor doorScript1= door2.GetComponent<CloseDoor>();
         if (doorScript1!= null)
         {
             doorScript1.Interact();
