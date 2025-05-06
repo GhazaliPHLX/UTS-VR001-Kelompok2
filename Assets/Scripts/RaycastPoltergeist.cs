@@ -19,7 +19,7 @@ public class RaycastPoltergeist : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(RaySource.position, RaySource.forward, Color.red);
+        
         if (!triggered && Physics.Raycast(RaySource.position, RaySource.forward, out RaycastHit hitInfo, 1f, playerMask))
         {
             ITrigger poltergeist = GetComponent<ITrigger>();
