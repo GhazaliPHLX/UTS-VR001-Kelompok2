@@ -19,13 +19,14 @@ public class GhostScream : MonoBehaviour, ITrigger
         if (!triggered)
         {
             StartCoroutine(ScreamAndDisable());
+            AudioSource.PlayClipAtPoint(screamClip, transform.position);
+
             triggered = true;
         }
     }
 
     private IEnumerator ScreamAndDisable()
     {
-        AudioSource.PlayClipAtPoint(screamClip, transform.position);
         yield return new WaitForSeconds(0.5f);
         agatha.SetActive(false);
     }
