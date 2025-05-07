@@ -14,7 +14,7 @@ public class FirstRoomJump : MonoBehaviour, ITrigger
         if (doorScript != null)
         {
             doorScript.Interact();
-            AudioSource.PlayClipAtPoint(doorBam, transform.position);
+            AudioSource.PlayClipAtPoint(doorBam, door1.transform.position);
             jumpScare.SetActive(true);
         }
     }

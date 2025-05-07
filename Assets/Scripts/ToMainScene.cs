@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Start_Game : MonoBehaviour
+public class Start_Game : MonoBehaviour, IInteractable
 {
-    public void LoadToScene(string sceneName)
+    [SerializeField] private Scene MainScene;
+    public void Interact()
     {
-        SceneManager.LoadScene(sceneName);
+        LoadToScene("MainScene");
+    }
+
+    public void LoadToScene(string MainScene)
+    {
+        SceneManager.LoadScene(MainScene);
     }
 }

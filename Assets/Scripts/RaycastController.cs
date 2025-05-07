@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RaycastInteractor : MonoBehaviour
 {
@@ -49,15 +50,24 @@ public class RaycastInteractor : MonoBehaviour
             {
                 if (hasHit)
                 {
+                    // Coba interaksi dengan gameobject biasa
                     var interactable = cachedHit.collider.GetComponent<IInteractable>();
                     interactable?.Interact();
-                    // Debug.Log("Interacted with: " + cachedHit.collider.name);
+
+                    // Coba interaksi dengan UI (button world space)
+                    var button = cachedHit.collider.GetComponent<Button>();
+                    if (button != null)
+                    {
+                        button.onClick.Invoke();
+                        Debug.Log("Clicked UI Button: " + button.name);
+                    }
                 }
                 else
                 {
                     Debug.Log("Nothing to interact with");
                 }
             }
+
         }
         else
         {

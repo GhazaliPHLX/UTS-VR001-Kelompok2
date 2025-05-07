@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class FlashlightScript : MonoBehaviour , IInteractable
 {
-    public GameObject flashlight;
-    public GameObject playerLight;
+    public GameObject UISenter;
 
     public void Interact()
     {
-        flashlight.SetActive(false);
-        playerLight.SetActive(true);
+        UISenter.SetActive(true);
     }
 
 }
