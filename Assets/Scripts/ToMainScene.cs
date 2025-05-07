@@ -5,14 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class Start_Game : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Scene MainScene;
     public void Interact()
     {
         LoadToScene("MainScene");
     }
 
-    public void LoadToScene(string MainScene)
+    public void LoadToScene(string sceneName)
     {
-        SceneManager.LoadScene(MainScene);
+        if (Application.CanStreamedLevelBeLoaded(sceneName))
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogError($"Scene '{sceneName}' tidak ditemukan atau belum ditambahkan ke Build Settings!");
+        }
     }
 }
