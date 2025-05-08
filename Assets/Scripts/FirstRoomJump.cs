@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstRoomJump : MonoBehaviour, ITrigger
+public class FirstRoomJump : MonoBehaviour, ITriggerPolt
 {
     public AudioClip doorBam;
     public GameObject door1;
     public GameObject jumpScare;
-    public void trigger()
+    public void triggerPolt()
     {
         
         CloseDoor doorScript = door1.GetComponent<CloseDoor>();

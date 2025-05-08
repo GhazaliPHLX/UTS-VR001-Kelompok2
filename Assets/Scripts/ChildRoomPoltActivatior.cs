@@ -8,7 +8,7 @@ public class RaycastPoltergeistChildRoom : MonoBehaviour
 
     [Header("Target Script to Disable")]
     public GameObject targetObject; 
-    public GameObject blockGameObject;
+    
 
     void Start()
     {
@@ -28,7 +28,6 @@ public class RaycastPoltergeistChildRoom : MonoBehaviour
                 {
                     targetScript.enabled = true;
                     triggered = true;
-                    blockGameObject.SetActive(false);
                     Debug.Log("RaycastPoltergeist script di target diaktifkan.");
                 }
                 else

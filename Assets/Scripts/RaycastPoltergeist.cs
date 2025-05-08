@@ -22,15 +22,16 @@ public class RaycastPoltergeist : MonoBehaviour
         if (!triggered && Physics.Raycast(RaySource.position, RaySource.forward, out RaycastHit hitInfo, 1f, playerMask))
         {
             if (hitInfo.collider.CompareTag("Player")){
-                ITrigger poltergeist = GetComponent<ITrigger>();
+                ITriggerPolt poltergeist = GetComponent<ITriggerPolt>();
                 if (poltergeist != null)
                 {
-                    poltergeist.trigger();
+                    poltergeist.triggerPolt();
                     Debug.Log("Hit Player");
                     triggered = true;
                 }
             }
+            Debug.DrawRay(RaySource.position, RaySource.forward, Color.red);
         }
-        Debug.DrawRay(RaySource.position, RaySource.forward, Color.red);
+        
     }
 }

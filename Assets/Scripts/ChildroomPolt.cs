@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChildroomPolt : MonoBehaviour , ITrigger
+public class ChildroomPolt : MonoBehaviour , ITriggerPolt
 {
     public Transform PlayerCam ;
     public AudioClip whisp;
     public GameObject door1;
     public GameObject door2;
-    public void trigger()
+    public void triggerPolt()
     {
         AudioSource.PlayClipAtPoint(whisp, PlayerCam.position);
 
