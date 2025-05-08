@@ -8,6 +8,7 @@ public class RaycastPoltergeist : MonoBehaviour
     public LayerMask playerMask;
     private bool triggered;
 
+
     void Start()
     {
         RaySource = GetComponent<Transform>();
@@ -20,13 +21,16 @@ public class RaycastPoltergeist : MonoBehaviour
         
         if (!triggered && Physics.Raycast(RaySource.position, RaySource.forward, out RaycastHit hitInfo, 1f, playerMask))
         {
-            ITrigger poltergeist = GetComponent<ITrigger>();
-            if (poltergeist != null)
-            {
-                poltergeist.trigger();
-                Debug.Log("Hit Player");
-                triggered = true;
+            if (hitInfo.collider.CompareTag("Player")){
+                ITrigger poltergeist = GetComponent<ITrigger>();
+                if (poltergeist != null)
+                {
+                    poltergeist.trigger();
+                    Debug.Log("Hit Player");
+                    triggered = true;
+                }
             }
         }
+        Debug.DrawRay(RaySource.position, RaySource.forward, Color.red);
     }
 }

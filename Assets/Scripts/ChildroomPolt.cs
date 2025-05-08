@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ChildroomPolt : MonoBehaviour , ITrigger
 {
-    public AudioSource doorBam;
+    public Transform PlayerCam ;
+    public AudioClip whisp;
     public GameObject door1;
     public GameObject door2;
     public void trigger()
     {
-        //doorBam.Play();
+        AudioSource.PlayClipAtPoint(whisp, PlayerCam.position);
+
         CloseDoor doorScript = door1.GetComponent<CloseDoor>();
         if(doorScript != null)
         {
