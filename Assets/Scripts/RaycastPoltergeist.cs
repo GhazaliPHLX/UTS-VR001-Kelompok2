@@ -18,7 +18,9 @@ public class RaycastPoltergeist : MonoBehaviour
 
     void Update()
     {
-        
+        Debug.DrawRay(RaySource.position, RaySource.forward, Color.red);
+
+
         if (!triggered && Physics.Raycast(RaySource.position, RaySource.forward, out RaycastHit hitInfo, 1f, playerMask))
         {
             if (hitInfo.collider.CompareTag("Player")){
@@ -30,7 +32,6 @@ public class RaycastPoltergeist : MonoBehaviour
                     triggered = true;
                 }
             }
-            Debug.DrawRay(RaySource.position, RaySource.forward, Color.red);
         }
         
     }

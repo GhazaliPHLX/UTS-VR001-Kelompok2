@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
+
 using UnityEngine;
 
 public class DrawerJumpscare : MonoBehaviour, IInteractable
@@ -22,7 +20,7 @@ public class DrawerJumpscare : MonoBehaviour, IInteractable
     {
         if (!isOpen)
         {
-            drawer.localPosition = new Vector3(0f, 0f, 0f);
+            drawer.localPosition = new Vector3(0.5f, 0f, 0f);
             isOpen = true;
             Debug.Log("Drawer dibuka");
             ITriggerPolt poltergeist = GetComponent<ITriggerPolt>();
@@ -34,8 +32,21 @@ public class DrawerJumpscare : MonoBehaviour, IInteractable
                     {
                         doorScript.Interact();
                         AudioSource.PlayClipAtPoint(doorclose, westRoomDoor.transform.position);
+
                         Debug.Log("DoorClosed");
-                    }
+                        DollMove dollMove = wheelchair.GetComponent<DollMove>();
+                        if (dollMove != null)
+                        {
+                            dollMove.enabled = true;
+                            Debug.Log("Script DollMove berhasil diaktifkan.");
+                        }
+                        Collider wcCollider = wheelchair.GetComponent<Collider>();
+                        if (wcCollider != null)
+                        {
+                            wcCollider.enabled = true;
+                            Debug.Log("Collider wheelchair diaktifkan.");
+                        }
+                }
                 triggered = true;
                 }
                 
@@ -44,7 +55,7 @@ public class DrawerJumpscare : MonoBehaviour, IInteractable
         }
         else
         {
-            drawer.localPosition = new Vector3(0.5f, 0f, 0f);
+            drawer.localPosition = new Vector3(0f, 0f, 0f);
             isOpen = false;
         }
     }
