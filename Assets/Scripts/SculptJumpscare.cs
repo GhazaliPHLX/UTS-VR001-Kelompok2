@@ -11,6 +11,6 @@ public class SculptJumpscare : MonoBehaviour, ITriggerPolt
     public void triggerPolt()
     {
         Rigidbody rb = sculpt.GetComponent<Rigidbody>();
-        rb.AddForce(pushDirection.normalized * forceAmount, ForceMode.Impulse);
+        rb.AddForce(pushDirection.normalized * forceAmount);
     }
 }

@@ -17097,7 +17097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad7b11552721564a80ff2c6e0f6ad5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorBam: {fileID: 0}
+  PlayerCam: {fileID: 0}
+  whisp: {fileID: 0}
   door1: {fileID: 1511095936}
   door2: {fileID: 1559692533}
 --- !u!114 &1858444809
@@ -18228,8 +18229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56352cba6d214e7478ec8ec04ec9320c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityX: 400
-  sensitivityY: 400
+  sensitivityX: 200
+  sensitivityY: 200
   orientation: {fileID: 1780789645}
 --- !u!81 &2015620745
 AudioListener:
